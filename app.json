@@ -1,32 +1,32 @@
 {
-  "id": "se.lksystems.mylk",
-  "version": "1.1.0",
+  "id": "se.ebeco.connect",
+  "version": "1.0.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
-  "brandColor": "#0082c8",
+  "brandColor": "#30318b",
   "name": {
-    "en": "LK Systems",
-    "sv": "LK Systems"
+    "en": "Ebeco Connect",
+    "sv": "Ebeco Connect"
   },
   "description": {
-    "en": "Adds support for LK Systems devices",
-    "sv": "Lägger till stöd för LK Systems-enheter"
+    "en": "Adds support for Ebeco Connect devices",
+    "sv": "Lägger till stöd för Ebeco Connect enheter"
   },
   "category": [
     "climate"
   ],
   "tags": {
     "en": [
-      "LK",
-      "ICS",
-      "ICS.2",
+      "Ebeco",
+      "Connect",
+      "EB-Therm 500",
       "Thermostat",
       "Underfloor heating"
     ],
     "sv": [
-      "LK",
-      "ICS",
-      "ICS.2",
+      "Ebeco",
+      "Connect",
+      "EB-Therm 500",
       "Termostat",
       "Golvvärme"
     ]
@@ -52,26 +52,18 @@
     {
       "id": "thermostat",
       "name": {
-        "en": "LK Thermostat",
-        "sv": "LK Termostat"
+        "en": "Ebeco Thermostat",
+        "sv": "Ebeco Termostat"
       },
       "class": "thermostat",
       "capabilities": [
         "target_temperature",
-        "measure_temperature",
-        "measure_battery"
+        "measure_temperature"
       ],
       "capabilitiesOptions": {
         "measure_temperature": {
           "decimals": 1
         }
-      },
-      "energy": {
-        "batteries": [
-          "AAA",
-          "AAA",
-          "AAA"
-        ]
       },
       "images": {
         "large": "/drivers/thermostat/assets/images/large.jpg",

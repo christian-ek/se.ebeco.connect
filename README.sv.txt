@@ -1,1 +1,1 @@
-Lägg till LK Webserver IP och lösenord i appinställningarna innan du söker efter enheter.
+Lägg till dina inloggningsuppgifter för Ebeco Connect i appinställningarna innan du söker efter enheter.
