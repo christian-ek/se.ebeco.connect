@@ -1,0 +1,1 @@
+Lägg till LK Webserver IP och lösenord i appinställningarna innan du söker efter enheter.

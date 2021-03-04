@@ -1,0 +1,1 @@
+Add your LK Webserver IP and Password in the app settings before adding devices.

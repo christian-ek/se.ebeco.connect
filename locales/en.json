@@ -1,0 +1,8 @@
+{
+  "settings": {
+    "ipLabel": "LK Webserver IP",
+    "passwordLabel": "Password",
+    "saveButton": "Save changes",
+    "savedText": "Settings saved!"
+  }
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- The '/homey.js' script must be included in your settings view to work -->
+    <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+    <script type="text/javascript" src="settings.js" data-origin="settings"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+</head>
+<body>
+<div id="app">
+    <div class="row">
+        <div class="logo-row">
+            <img class="logo" src="lk_systems_logo.svg"  width="200" height="100">
+        </div>
+    </div>
+
+    <fieldset class="listContainer">
+        <div class="form-group">
+            <label for="ip" data-i18n="settings.ipLabel">LK Webserver IP</label>
+            <input type="text" class="form-control" id="ip">
+        </div>
+        <div class="form-group">
+            <label for="password" data-i18n="settings.passwordLabel">Password</label>
+            <input type="password" class="form-control" id="password">
+        </div>
+    </fieldset>
+    <div>
+        <button type="submit" id="save" class="btn btn-primary" data-i18n="settings.saveButton">Save changes</button>
+        <p id="saved" data-i18n="settings.savedText"></p>
+    </div>
+</div>
+</body>
+</html>
