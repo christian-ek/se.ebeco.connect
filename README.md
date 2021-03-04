@@ -1,3 +1,3 @@
-# LK Systems
+# Ebeco Connect
 
-Adds support for LK Systems thermostat.
+Adds support for Ebeco Connect thermostats.

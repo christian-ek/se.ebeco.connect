@@ -2,12 +2,12 @@
 
 const Homey = require('homey');
 
-class LkApp extends Homey.App {
+class EbecoApp extends Homey.App {
 
   onInit() {
-    this.log('Successfully init LK App');
+    this.log('Successfully init Ebeco App');
   }
 
 }
 
-module.exports = LkApp;
+module.exports = EbecoApp;

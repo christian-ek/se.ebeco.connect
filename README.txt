@@ -1,1 +1,1 @@
-Add your LK Webserver IP and Password in the app settings before adding devices.
+Add your Ebeco Connect login information in the app settings before adding devices.
