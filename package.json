@@ -1,0 +1,14 @@
+{
+  "name": "se.lksystems.mylk",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {
+    "eslint": "^7.8.1",
+    "eslint-config-athom": "^2.1.0",
+    "homey": "^2.6.1"
+  },
+  "author": "Christian Ek",
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  }
+}

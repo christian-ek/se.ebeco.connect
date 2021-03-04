@@ -1,0 +1,61 @@
+{
+  "id": "thermostat",
+  "name": {
+    "en": "LK Thermostat",
+    "sv": "LK Termostat"
+  },
+  "class": "thermostat",
+  "capabilities": [
+    "target_temperature",
+    "measure_temperature",
+    "measure_battery"
+  ],
+  "capabilitiesOptions": {
+    "measure_temperature": {
+      "decimals": 1
+    }
+  },
+
+  "energy": {
+    "batteries": ["AAA", "AAA", "AAA"]
+  },
+  "images": {
+    "large": "/drivers/thermostat/assets/images/large.jpg",
+    "small": "/drivers/thermostat/assets/images/small.jpg"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Update device interval",
+        "sv": "Uppdateringsintervall för hämtning av data"
+      },
+      "children": [
+        {
+          "id": "interval",
+          "type": "number",
+          "label": {
+            "en": "minutes",
+            "sv": "minuter"
+          },
+          "value": 1,
+          "min": 1,
+          "max": 59
+        }
+      ]
+    }
+  ]
+}
