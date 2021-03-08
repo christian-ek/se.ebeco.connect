@@ -5,7 +5,7 @@ const Homey = require('homey');
 class EbecoApp extends Homey.App {
 
   onInit() {
-    this.log('Successfully init Ebeco App');
+    this.log('Successfully init Ebeco Connect App');
   }
 
 }
