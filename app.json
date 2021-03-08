@@ -52,8 +52,8 @@
     {
       "id": "thermostat",
       "name": {
-        "en": "Ebeco Thermostat",
-        "sv": "Ebeco Termostat"
+        "en": "EB-Therm 500",
+        "sv": "EB-Therm 500"
       },
       "class": "thermostat",
       "capabilities": [
@@ -62,7 +62,12 @@
       ],
       "capabilitiesOptions": {
         "measure_temperature": {
-          "decimals": 1
+          "decimals": 0,
+          "step": 1
+        },
+        "target_temperature": {
+          "decimals": 0,
+          "step": 1
         }
       },
       "images": {

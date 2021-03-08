@@ -1,23 +1,23 @@
 {
   "id": "thermostat",
   "name": {
-    "en": "LK Thermostat",
-    "sv": "LK Termostat"
+    "en": "EB-Therm 500",
+    "sv": "EB-Therm 500"
   },
   "class": "thermostat",
   "capabilities": [
     "target_temperature",
-    "measure_temperature",
-    "measure_battery"
+    "measure_temperature"
   ],
   "capabilitiesOptions": {
     "measure_temperature": {
-      "decimals": 1
+      "decimals": 0,
+      "step": 1
+    },
+    "target_temperature": {
+      "decimals": 0,
+      "step": 1
     }
-  },
-
-  "energy": {
-    "batteries": ["AAA", "AAA", "AAA"]
   },
   "images": {
     "large": "/drivers/thermostat/assets/images/large.jpg",

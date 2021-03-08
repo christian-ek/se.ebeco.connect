@@ -5,7 +5,8 @@
   "devDependencies": {
     "eslint": "^7.8.1",
     "eslint-config-athom": "^2.1.0",
-    "homey": "^2.6.1"
+    "homey": "^2.0.6",
+    "npm-programmatic": "^0.0.10"
   },
   "author": "Christian Ek",
   "dependencies": {

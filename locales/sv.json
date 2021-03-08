@@ -1,6 +1,6 @@
 {
   "settings": {
-    "ipLabel": "LK Webserver IP",
+    "emailLabel": "E-post",
     "passwordLabel": "Lösenord",
     "saveButton": "Spara ändringar",
     "savedText": "Inställningar sparade!"

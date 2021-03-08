@@ -1,7 +1,7 @@
 'use strict';
 
-const LkDevice = require('../../lib/LkDevice.js');
+const EbecoDevice = require('../../lib/EbecoDevice.js');
 
-class ThermostatDevice extends LkDevice {}
+class ThermostatDevice extends EbecoDevice {}
 
 module.exports = ThermostatDevice;

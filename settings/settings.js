@@ -6,15 +6,15 @@ function onHomeyReady(Homey) {
   // Tell Homey we're ready to be displayed
   Homey.ready();
 
-  const ipElement = document.getElementById('ip');
+  const emailElement = document.getElementById('email');
   const passwordElement = document.getElementById('password');
   const saveElement = document.getElementById('save');
   const savedTextElement = document.getElementById('saved');
 
   // eslint-disable-next-line consistent-return
-  Homey.get('ip', (err, ip) => {
+  Homey.get('email', (err, email) => {
     if (err) return Homey.alert(err);
-    ipElement.value = ip;
+    emailElement.value = email;
   });
 
   Homey.get('password', (err, password) => {
@@ -23,7 +23,7 @@ function onHomeyReady(Homey) {
   });
 
   saveElement.addEventListener('click', e => {
-    Homey.set('ip', ipElement.value, err => {
+    Homey.set('email', emailElement.value, err => {
       if (err) return Homey.alert(err);
     });
     Homey.set('password', passwordElement.value, err => {

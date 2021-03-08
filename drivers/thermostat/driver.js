@@ -1,7 +1,7 @@
 'use strict';
 
-const LkDriver = require('../../lib/LkDriver.js');
+const EbecoDriver = require('../../lib/EbecoDriver.js');
 
-class ThermostatDriver extends LkDriver {}
+class ThermostatDriver extends EbecoDriver {}
 
 module.exports = ThermostatDriver;
