@@ -4,5 +4,8 @@
   },
   "1.0.1": {
     "en": "Fixing logo"
+  },
+  "1.0.2": {
+    "en": "Add EB-Therm 500 device settings to select wether room or floor temperature regulates thermostat"
   }
 }
