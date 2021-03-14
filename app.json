@@ -1,6 +1,6 @@
 {
   "id": "se.ebeco.connect",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#30318b",

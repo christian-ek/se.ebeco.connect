@@ -10,5 +10,8 @@
   },
   "1.0.3": {
     "en": "Fix logging bug"
+  },
+  "1.0.4": {
+    "en": "Fix bug with API Authorization"
   }
 }
