@@ -40,6 +40,40 @@
     {
       "type": "group",
       "label": {
+        "en": "Use floor temperature or room temperature for regulating thermostat",
+        "sv": "Använd golvtemperatur eller rumstemperatur för att regulera termostat"
+      },
+      "children": [
+        {
+          "id": "regulator",
+          "type": "dropdown",
+          "value": "temperatureFloor",
+          "label": {
+            "en": "Regulating temperature",
+            "sv": "Regulerande temperatur"
+          },
+          "values": [
+            {
+              "id": "temperatureFloor",
+              "label": {
+                "en": "Floor temperature",
+                "sv": "Golvtemperatur"
+              }
+            },
+            {
+              "id": "temperatureRoom",
+              "label": {
+                "en": "Room temperature",
+                "sv": "Rumstemperatur"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "label": {
         "en": "Update device interval",
         "sv": "Uppdateringsintervall för hämtning av data"
       },
