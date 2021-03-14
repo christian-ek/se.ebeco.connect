@@ -1,6 +1,6 @@
 {
   "id": "se.ebeco.connect",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#30318b",
@@ -89,6 +89,40 @@
         }
       ],
       "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Use floor temperature or room temperature for regulating thermostat",
+            "sv": "Använd golvtemperatur eller rumstemperatur för att regulera termostat"
+          },
+          "children": [
+            {
+              "id": "regulator",
+              "type": "dropdown",
+              "value": "temperatureFloor",
+              "label": {
+                "en": "Regulating temperature",
+                "sv": "Regulerande temperatur"
+              },
+              "values": [
+                {
+                  "id": "temperatureFloor",
+                  "label": {
+                    "en": "Floor temperature",
+                    "sv": "Golvtemperatur"
+                  }
+                },
+                {
+                  "id": "temperatureRoom",
+                  "label": {
+                    "en": "Room temperature",
+                    "sv": "Rumstemperatur"
+                  }
+                }
+              ]
+            }
+          ]
+        },
         {
           "type": "group",
           "label": {
