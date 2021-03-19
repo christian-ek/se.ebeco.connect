@@ -13,5 +13,8 @@
   },
   "1.0.4": {
     "en": "Fix bug with API Authorization"
+  },
+  "1.0.5": {
+    "en": "Fix bug when setting temperature via homey"
   }
 }
