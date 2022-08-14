@@ -16,5 +16,8 @@
   },
   "1.0.5": {
     "en": "Fix bug when setting temperature via homey"
+  },
+  "1.0.6": {
+    "en": "Minor fix"
   }
 }
