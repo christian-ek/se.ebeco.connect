@@ -22,5 +22,8 @@
   },
   "1.0.7": {
     "en": "Minor fix"
+  },
+  "1.1.0": {
+    "en": "Add power consumption to thermostats"
   }
 }

@@ -1,6 +1,6 @@
 {
   "id": "se.ebeco.connect",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#30318b",
@@ -59,7 +59,8 @@
       "class": "thermostat",
       "capabilities": [
         "target_temperature",
-        "measure_temperature"
+        "measure_temperature",
+        "measure_power"
       ],
       "capabilitiesOptions": {
         "measure_temperature": {
@@ -69,6 +70,9 @@
         "target_temperature": {
           "decimals": 0,
           "step": 1
+        },
+        "measure_power": {
+          "approximated": true
         }
       },
       "images": {
