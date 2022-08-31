@@ -7,7 +7,8 @@
   "class": "thermostat",
   "capabilities": [
     "target_temperature",
-    "measure_temperature"
+    "measure_temperature",
+    "measure_power"
   ],
   "capabilitiesOptions": {
     "measure_temperature": {
@@ -17,6 +18,9 @@
     "target_temperature": {
       "decimals": 0,
       "step": 1
+    },
+    "measure_power": {
+      "approximated": true
     }
   },
   "images": {
