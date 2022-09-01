@@ -1,6 +1,6 @@
 {
   "id": "se.ebeco.connect",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#30318b",
@@ -9,8 +9,8 @@
     "sv": "Ebeco Connect"
   },
   "description": {
-    "en": "Adds support for Ebeco Connect devices",
-    "sv": "Lägger till stöd för Ebeco Connect enheter"
+    "en": "Heating solutions for your whole home",
+    "sv": "Värmelösningar för hela ditt hem"
   },
   "category": [
     "climate"
@@ -33,8 +33,9 @@
   },
   "permissions": [],
   "images": {
+    "small": "/assets/images/small.jpg",
     "large": "/assets/images/large.jpg",
-    "small": "/assets/images/small.jpg"
+    "xlarge": "/assets/images/xlarge.jpg"
   },
   "author": {
     "name": "Christian Ek",
