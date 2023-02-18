@@ -1,0 +1,12 @@
+{
+  "type": "text",
+  "label": {
+    "en": "Username",
+    "sv": "Användarnamn"
+  },
+  "hint": {
+    "en": "Username to Ebeco Connect (e-mail).",
+    "sv": "Användarnamn till Ebeco Connect (e-post)."
+  },
+  "value": "-"
+}

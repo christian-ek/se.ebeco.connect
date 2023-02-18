@@ -1,0 +1,19 @@
+{
+  "id": "interval",
+  "type": "number",
+  "label": {
+    "en": "Interval",
+    "sv": "Intervall"
+  },
+  "hint": {
+    "en": "Polling interval for device.",
+    "sv": "Intervall för dataförfrågningar till enhet."
+  },
+  "value": 60,
+  "min": 10,
+  "max": 3600,
+  "units": {
+    "en": "seconds",
+    "sv": "sekunder"
+  }
+}

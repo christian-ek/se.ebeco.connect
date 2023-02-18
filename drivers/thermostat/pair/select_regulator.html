@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <script src="../../../assets/vue.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <header class="homey-header">
+      <h1 class="homey-title" data-i18n="select_regulator.title"></h1>
+      <p class="homey-subtitle" data-i18n="select_regulator.subtitle"></p>
+    </header>
+    <form class="homey-form">
+      <fieldset class="homey-form-fieldset">
+        <legend class="homey-form-legend" data-i18n="select_regulator.checkbox_title"></legend>
+        
+        <div class="homey-form-group">
+          <fieldset class="homey-form-radio-set">
+
+            <label class="homey-form-radio" v-for="regulator in availableRegulators">
+              <input class="homey-form-radio-input" type="radio" name="regulator" :value="regulator" v-model="selected"/>
+              <span class="homey-form-radio-checkmark"></span>
+              <span class="homey-form-radio-text" :data-i18n="'select_regulator.' + regulator"></span>
+            </label>
+        
+          </fieldset>
+        </div>
+      </fieldset>
+    </form>
+    <button @click="select" class="homey-button-primary-full" :disabled="error" data-i18n="select_regulator.save"></button>
+  </div>
+
+  <script>
+
+    Homey.setTitle('');
+
+    new Vue({
+      el: "#app",
+      data: function () {
+        return {
+          availableRegulators: [
+            'temperatureFloor',
+            'temperatureRoom'
+          ],
+          selected: 'temperatureFloor',
+          error: false
+        }
+      },
+      methods: {
+        select() {
+          //Homey.showLoadingOverlay();
+
+          Homey.emit('select_regulator', this.selected)
+            .then(device => {
+              if (device) {
+                Homey.createDevice(device)
+                .then(Homey.done())
+                .catch(function(err) {
+                  this.error = true;
+                  return Homey.alert(err.message);
+                });
+              } else {
+                console.log('select_regulator failed');
+                this.error = true;
+              }
+          })
+          .catch(function(err){
+            this.error = true;
+            return Homey.alert(err.message);
+          });
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

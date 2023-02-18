@@ -6,16 +6,32 @@
   },
   "class": "thermostat",
   "capabilities": [
-    "target_temperature",
-    "measure_temperature",
+    "target_temperature.temperatureFloor",
+    "measure_temperature.temperatureFloor",
+    "target_temperature.temperatureRoom",
+    "measure_temperature.temperatureRoom",
     "measure_power"
   ],
   "capabilitiesOptions": {
-    "measure_temperature": {
+    "measure_temperature.temperatureFloor": {
+      "title": {
+        "en": "Floor temperature",
+        "sv": "Golvtemperatur"
+      },
+      "decimals": 0
+    },
+    "measure_temperature.temperatureRoom": {
+      "title": {
+        "en": "Room temperature",
+        "sv": "Rumstemperatur"
+      },
+      "decimals": 0
+    },
+    "target_temperature.temperatureRoom": {
       "decimals": 0,
       "step": 1
     },
-    "target_temperature": {
+    "target_temperature.temperatureFloor": {
       "decimals": 0,
       "step": 1
     },
@@ -29,71 +45,42 @@
   },
   "pair": [
     {
-      "id": "list_devices",
-      "template": "list_devices",
-      "navigation": {
-        "next": "add_devices"
+      "id": "login_credentials",
+      "template": "login_credentials",
+      "options": {
+        "logo": "../../../assets/logo.svg",
+        "title": {
+          "en": "Login to Ebeco Connect",
+          "sv": "Logga in på Ebeco Connect"
+        },
+        "usernameLabel": { 
+          "en": "E-mail address",
+          "sv": "E-postadress"
+        },
+        "usernamePlaceholder": { 
+          "en": "john@doe.com",
+          "sv": "john@doe.com"
+        },
+        "passwordLabel": { 
+          "en": "Password",
+          "sv": "Lösenord"
+        },
+        "passwordPlaceholder": { 
+          "en": "Password",
+          "sv": "Lösenord" 
+        }
       }
     },
     {
-      "id": "add_devices",
-      "template": "add_devices"
-    }
-  ],
-  "settings": [
-    {
-      "type": "group",
-      "label": {
-        "en": "Use floor temperature or room temperature for regulating thermostat",
-        "sv": "Använd golvtemperatur eller rumstemperatur för att regulera termostat"
+      "id": "list_devices",
+      "template": "list_devices",
+      "options": {
+        "singular": true
       },
-      "children": [
-        {
-          "id": "regulator",
-          "type": "dropdown",
-          "value": "temperatureFloor",
-          "label": {
-            "en": "Regulating temperature",
-            "sv": "Regulerande temperatur"
-          },
-          "values": [
-            {
-              "id": "temperatureFloor",
-              "label": {
-                "en": "Floor temperature",
-                "sv": "Golvtemperatur"
-              }
-            },
-            {
-              "id": "temperatureRoom",
-              "label": {
-                "en": "Room temperature",
-                "sv": "Rumstemperatur"
-              }
-            }
-          ]
-        }
-      ]
+      "navigation": { "next": "select_regulator" }
     },
     {
-      "type": "group",
-      "label": {
-        "en": "Update device interval",
-        "sv": "Uppdateringsintervall för hämtning av data"
-      },
-      "children": [
-        {
-          "id": "interval",
-          "type": "number",
-          "label": {
-            "en": "minutes",
-            "sv": "minuter"
-          },
-          "value": 1,
-          "min": 1,
-          "max": 59
-        }
-      ]
+      "id": "select_regulator"
     }
   ]
 }

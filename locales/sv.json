@@ -1,8 +1,10 @@
 {
-  "settings": {
-    "emailLabel": "E-post",
-    "passwordLabel": "Lösenord",
-    "saveButton": "Spara ändringar",
-    "savedText": "Inställningar sparade!"
+  "select_regulator": {
+    "title": "Använd golvtemperatur eller rumstemperatur för att regulera termostat",
+    "subtitle": "Detta kan inte ändras senare, så om du vill ändra så behöver du lägga till enheten igen.",
+    "checkbox_title": "Regulerande temperatur",
+    "temperatureRoom": "Rumstemperatur",
+    "temperatureFloor": "Golvtemperatur",
+    "save": "Spara enheten"
   }
 }
