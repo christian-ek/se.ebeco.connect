@@ -1,0 +1,56 @@
+{
+  "id": "se.ebeco.connect",
+  "version": "1.1.1",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Ebeco Connect",
+    "sv": "Ebeco Connect"
+  },
+  "description": {
+    "en": "Heating solutions for your whole home",
+    "sv": "Värmelösningar för hela ditt hem"
+  },
+  "category": [
+    "climate"
+  ],
+  "permissions": [],
+  "images": {
+    "xlarge": "/assets/images/xlarge.jpg",
+    "large": "/assets/images/large.jpg",
+    "small": "/assets/images/small.jpg"
+  },
+  "author": {
+    "name": "Christian Ek",
+    "email": "christian.ek@live.se"
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "christianoak"
+      }
+    }
+  },
+  "support": "mailto:christian.ek@live.se",
+  "brandColor": "#30318b",
+  "tags": {
+    "en": [
+      "Ebeco",
+      "Connect",
+      "EB-Therm 500",
+      "Thermostat",
+      "Underfloor heating"
+    ],
+    "sv": [
+      "Ebeco",
+      "Connect",
+      "EB-Therm 500",
+      "Termostat",
+      "Golvvärme"
+    ]
+  },
+  "source": "https://github.com/christian-ek/se.ebeco.connect"
+}

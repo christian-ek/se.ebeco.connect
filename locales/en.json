@@ -1,8 +1,10 @@
 {
-  "settings": {
-    "emailLabel": "E-mail",
-    "passwordLabel": "Password",
-    "saveButton": "Save changes",
-    "savedText": "Settings saved!"
+  "select_regulator": {
+    "title": "Use floor temperature or room temperature for regulating thermostat",
+    "subtitle": "This cannot be changed later, so if you want to change then you will need to add the device again.",
+    "checkbox_title": "Regulating temperature",
+    "temperatureRoom": "Room temperature",
+    "temperatureFloor": "Floor temperature",
+    "save": "Save device"
   }
 }

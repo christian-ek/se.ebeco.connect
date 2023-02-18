@@ -1,9 +1,12 @@
 {
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "se.ebeco.connect",
   "version": "1.1.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
-  "brandColor": "#30318b",
+  "platforms": [
+    "local"
+  ],
   "name": {
     "en": "Ebeco Connect",
     "sv": "Ebeco Connect"
@@ -15,6 +18,25 @@
   "category": [
     "climate"
   ],
+  "permissions": [],
+  "images": {
+    "xlarge": "/assets/images/xlarge.jpg",
+    "large": "/assets/images/large.jpg",
+    "small": "/assets/images/small.jpg"
+  },
+  "author": {
+    "name": "Christian Ek",
+    "email": "christian.ek@live.se"
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "christianoak"
+      }
+    }
+  },
+  "support": "mailto:christian.ek@live.se",
+  "brandColor": "#30318b",
   "tags": {
     "en": [
       "Ebeco",
@@ -31,25 +53,7 @@
       "Golvvärme"
     ]
   },
-  "permissions": [],
-  "images": {
-    "small": "/assets/images/small.jpg",
-    "large": "/assets/images/large.jpg",
-    "xlarge": "/assets/images/xlarge.jpg"
-  },
-  "author": {
-    "name": "Christian Ek",
-    "email": "christian.ek@live.se"
-  },
-  "contributing": {
-    "donate": {
-      "paypal": {
-        "username": "christianoak"
-      }
-    }
-  },
-  "homepage": "https://ebeco.com",
-  "support": "mailto:christian.ek@live.se",
+  "source": "https://github.com/christian-ek/se.ebeco.connect",
   "drivers": [
     {
       "id": "thermostat",
@@ -59,16 +63,32 @@
       },
       "class": "thermostat",
       "capabilities": [
-        "target_temperature",
-        "measure_temperature",
+        "target_temperature.temperatureFloor",
+        "measure_temperature.temperatureFloor",
+        "target_temperature.temperatureRoom",
+        "measure_temperature.temperatureRoom",
         "measure_power"
       ],
       "capabilitiesOptions": {
-        "measure_temperature": {
+        "measure_temperature.temperatureFloor": {
+          "title": {
+            "en": "Floor temperature",
+            "sv": "Golvtemperatur"
+          },
+          "decimals": 0
+        },
+        "measure_temperature.temperatureRoom": {
+          "title": {
+            "en": "Room temperature",
+            "sv": "Rumstemperatur"
+          },
+          "decimals": 0
+        },
+        "target_temperature.temperatureRoom": {
           "decimals": 0,
           "step": 1
         },
-        "target_temperature": {
+        "target_temperature.temperatureFloor": {
           "decimals": 0,
           "step": 1
         },
@@ -82,52 +102,47 @@
       },
       "pair": [
         {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "../../../assets/logo.svg",
+            "title": {
+              "en": "Login to Ebeco Connect",
+              "sv": "Logga in på Ebeco Connect"
+            },
+            "usernameLabel": {
+              "en": "E-mail address",
+              "sv": "E-postadress"
+            },
+            "usernamePlaceholder": {
+              "en": "john@doe.com",
+              "sv": "john@doe.com"
+            },
+            "passwordLabel": {
+              "en": "Password",
+              "sv": "Lösenord"
+            },
+            "passwordPlaceholder": {
+              "en": "Password",
+              "sv": "Lösenord"
+            }
           }
         },
         {
-          "id": "add_devices",
-          "template": "add_devices"
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": true
+          },
+          "navigation": {
+            "next": "select_regulator"
+          }
+        },
+        {
+          "id": "select_regulator"
         }
       ],
       "settings": [
-        {
-          "type": "group",
-          "label": {
-            "en": "Use floor temperature or room temperature for regulating thermostat",
-            "sv": "Använd golvtemperatur eller rumstemperatur för att regulera termostat"
-          },
-          "children": [
-            {
-              "id": "regulator",
-              "type": "dropdown",
-              "value": "temperatureFloor",
-              "label": {
-                "en": "Regulating temperature",
-                "sv": "Regulerande temperatur"
-              },
-              "values": [
-                {
-                  "id": "temperatureFloor",
-                  "label": {
-                    "en": "Floor temperature",
-                    "sv": "Golvtemperatur"
-                  }
-                },
-                {
-                  "id": "temperatureRoom",
-                  "label": {
-                    "en": "Room temperature",
-                    "sv": "Rumstemperatur"
-                  }
-                }
-              ]
-            }
-          ]
-        },
         {
           "type": "group",
           "label": {
@@ -136,15 +151,49 @@
           },
           "children": [
             {
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "Username",
+                "sv": "Användarnamn"
+              },
+              "hint": {
+                "en": "Username to Ebeco Connect (e-mail).",
+                "sv": "Användarnamn till Ebeco Connect (e-post)."
+              },
+              "value": "-"
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "sv": "Lösenord"
+              },
+              "hint": {
+                "en": "Password to Ebeco Connect.",
+                "sv": "Lösenord till Ebeco Connect."
+              },
+              "value": "-"
+            },
+            {
               "id": "interval",
               "type": "number",
               "label": {
-                "en": "minutes",
-                "sv": "minuter"
+                "en": "Interval",
+                "sv": "Intervall"
               },
-              "value": 1,
-              "min": 1,
-              "max": 59
+              "hint": {
+                "en": "Polling interval for device.",
+                "sv": "Intervall för dataförfrågningar till enhet."
+              },
+              "value": 60,
+              "min": 10,
+              "max": 3600,
+              "units": {
+                "en": "seconds",
+                "sv": "sekunder"
+              }
             }
           ]
         }

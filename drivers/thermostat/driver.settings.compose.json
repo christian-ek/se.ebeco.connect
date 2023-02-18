@@ -1,0 +1,20 @@
+[
+  {
+    "type": "group",
+    "label": {
+      "en": "Update device interval",
+      "sv": "Uppdateringsintervall för hämtning av data"
+    },
+    "children": [
+      {
+        "$extends": "username"
+      },
+      {
+        "$extends": "password"
+      },
+      {
+        "$extends": "interval"
+      }
+    ]
+  }
+]
