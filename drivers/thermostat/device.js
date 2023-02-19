@@ -11,15 +11,32 @@ class ThermostatDevice extends Homey.Device {
     const firstRun = this.getStoreValue('first_run');
 
     if (firstRun != null && firstRun) {
-      /* During the first run we remove the target_temperature sub capability
-       * which is connected to the regulator that is not in use.
-       * The user selects regulator during setup.
-       */
-
       if (this.getSetting('regulator') === 'temperatureFloor') {
-        this.removeCapability('target_temperature.temperatureRoom');
+        this.setCapabilityOptions('measure_temperature', {
+          title: {
+            en: 'Floor temperature',
+            sv: 'Golvtemperatur',
+          },
+        });
+        this.setCapabilityOptions('measure_temperature.alt', {
+          title: {
+            en: 'Room temperature',
+            sv: 'Rumstemperatur',
+          },
+        });
       } else if (this.getSetting('regulator') === 'temperatureRoom') {
-        this.removeCapability('target_temperature.temperatureFloor');
+        this.setCapabilityOptions('measure_temperature.alt', {
+          title: {
+            en: 'Floor temperature',
+            sv: 'Golvtemperatur',
+          },
+        });
+        this.setCapabilityOptions('measure_temperature', {
+          title: {
+            en: 'Room temperature',
+            sv: 'Rumstemperatur',
+          },
+        });
       }
 
       this.setStoreValue('first_run', false);
@@ -32,7 +49,7 @@ class ThermostatDevice extends Homey.Device {
     const { device } = this;
     this.log(`[${this.getName()}][${device.id}]`, `Update Interval: ${updateInterval}`);
 
-    this.registerCapabilityListener(`target_temperature.${this.getSetting('regulator')}`, this.onCapabilitySetTemperature.bind(this));
+    this.registerCapabilityListener('target_temperature', this.onCapabilitySetTemperature.bind(this));
 
     await this.getDeviceData();
 
@@ -47,11 +64,14 @@ class ThermostatDevice extends Homey.Device {
     await this.api.getDevice(device.id)
       .then(data => {
         this.log(data);
-
-        this.setCapabilityValue(`target_temperature.${this.getSetting('regulator')}`, parseFloat(data.temperatureSet)).catch(this.error);
-
-        this.setCapabilityValue('measure_temperature.temperatureFloor', data.temperatureFloor).catch(this.error);
-        this.setCapabilityValue('measure_temperature.temperatureRoom', data.temperatureRoom).catch(this.error);
+        this.setCapabilityValue('target_temperature', parseFloat(data.temperatureSet)).catch(this.error);
+        if (this.getSetting('regulator') === 'temperatureFloor') {
+          this.setCapabilityValue('measure_temperature', data.temperatureFloor).catch(this.error);
+          this.setCapabilityValue('measure_temperature.alt', data.temperatureRoom).catch(this.error);
+        } else if (this.getSetting('regulator') === 'temperatureRoom') {
+          this.setCapabilityValue('measure_temperature', data.temperatureRoom).catch(this.error);
+          this.setCapabilityValue('measure_temperature.alt', data.temperatureFloor).catch(this.error);
+        }
         if (data.relayOn) {
           this.setCapabilityValue('measure_power', data.installedEffect).catch(this.error);
         } else {
@@ -62,8 +82,8 @@ class ThermostatDevice extends Homey.Device {
 
   async onCapabilitySetTemperature(value) {
     try {
-      await this.setCapabilityValue(`target_temperature.${this.getSetting('regulator')}`, value);
-      await this.updateCapabilityValues(`target_temperature.${this.getSetting('regulator')}`);
+      await this.setCapabilityValue('target_temperature', value);
+      await this.updateCapabilityValues('target_temperature');
     } catch (error) {
       this.log(error);
       throw new Error(error);
@@ -74,7 +94,7 @@ class ThermostatDevice extends Homey.Device {
     const { device } = this;
 
     const data = {
-      temperatureSet: this.getCapabilityValue(`target_temperature.${this.getSetting('regulator')}`),
+      temperatureSet: this.getCapabilityValue('target_temperature'),
       id: device.id,
     };
 
