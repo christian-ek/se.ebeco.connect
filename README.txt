@@ -1,1 +1,4 @@
-Add your Ebeco Connect login information in the app settings before adding devices.
+# Ebeco Connect
+
+This app adds Ebeco Connect thermostat support for Homey Pro.
+It allows you to monitor and control Ebeco devices by communicating with the Ebeco Connect REST Api.
