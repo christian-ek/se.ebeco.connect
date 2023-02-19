@@ -8,39 +8,6 @@ class ThermostatDevice extends Homey.Device {
   async onInit() {
     this.device = this.getData();
     const settings = this.getSettings();
-    const firstRun = this.getStoreValue('first_run');
-
-    if (firstRun != null && firstRun) {
-      if (this.getSetting('regulator') === 'temperatureFloor') {
-        this.setCapabilityOptions('measure_temperature', {
-          title: {
-            en: 'Floor temperature',
-            sv: 'Golvtemperatur',
-          },
-        });
-        this.setCapabilityOptions('measure_temperature.alt', {
-          title: {
-            en: 'Room temperature',
-            sv: 'Rumstemperatur',
-          },
-        });
-      } else if (this.getSetting('regulator') === 'temperatureRoom') {
-        this.setCapabilityOptions('measure_temperature.alt', {
-          title: {
-            en: 'Floor temperature',
-            sv: 'Golvtemperatur',
-          },
-        });
-        this.setCapabilityOptions('measure_temperature', {
-          title: {
-            en: 'Room temperature',
-            sv: 'Rumstemperatur',
-          },
-        });
-      }
-
-      this.setStoreValue('first_run', false);
-    }
 
     this.api = new EbecoApi(settings.username, settings.password, this.homey);
 
@@ -80,6 +47,34 @@ class ThermostatDevice extends Homey.Device {
       });
   }
 
+  async setTempCapabilitiesOptions(regulator) {
+    this.log('Updating measure_temperature and measure_temperature.alt capabilitiesOptions');
+
+    const floorOptions = {
+      decimals: 0,
+      title: {
+        en: 'Floor temperature',
+        sv: 'Golvtemperatur',
+      },
+    };
+
+    const roomOptions = {
+      decimals: 0,
+      title: {
+        en: 'Room temperature',
+        sv: 'Rumstemperatur',
+      },
+    };
+
+    if (regulator === 'temperatureFloor') {
+      this.setCapabilityOptions('measure_temperature', floorOptions);
+      this.setCapabilityOptions('measure_temperature.alt', roomOptions);
+    } else if (regulator === 'temperatureRoom') {
+      this.setCapabilityOptions('measure_temperature', roomOptions);
+      this.setCapabilityOptions('measure_temperature.alt', floorOptions);
+    }
+  }
+
   async onCapabilitySetTemperature(value) {
     try {
       await this.setCapabilityValue('target_temperature', value);
@@ -114,7 +109,7 @@ class ThermostatDevice extends Homey.Device {
       regulator: this.getSetting('regulator'),
     });
 
-    this.log('store', this.getStore());
+    this.setTempCapabilitiesOptions(this.getSetting('regulator'));
   }
 
   onRenamed(name) {
@@ -147,6 +142,9 @@ class ThermostatDevice extends Homey.Device {
       /* Log setting changes except for password */
       if (name !== 'password') {
         this.log(`Setting '${name}' set '${oldSettings[name]}' => '${newSettings[name]}'`);
+      }
+      if (name === 'regulator') {
+        await this.setTempCapabilitiesOptions(newSettings[name]);
       }
     }
     if (oldSettings.interval !== newSettings.interval) {

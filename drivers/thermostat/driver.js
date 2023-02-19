@@ -48,9 +48,6 @@ class ThermostatDriver extends Homey.Driver {
             interval: 30,
             regulator: 'temperatureFloor',
           },
-          store: {
-            first_run: true,
-          },
         };
       });
 

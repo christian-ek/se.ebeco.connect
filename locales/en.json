@@ -1,7 +1,7 @@
 {
   "select_regulator": {
     "title": "Use floor temperature or room temperature for regulating thermostat",
-    "subtitle": "This cannot be changed later, so if you want to change then you will need to add the device again.",
+    "subtitle": "This is a setting in the thermostat itself.",
     "checkbox_title": "Regulating temperature",
     "temperatureRoom": "Room temperature",
     "temperatureFloor": "Floor temperature",
