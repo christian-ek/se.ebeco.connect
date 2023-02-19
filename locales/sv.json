@@ -1,7 +1,7 @@
 {
   "select_regulator": {
     "title": "Använd golvtemperatur eller rumstemperatur för att regulera termostat",
-    "subtitle": "Detta kan inte ändras senare, så om du vill ändra så behöver du lägga till enheten igen.",
+    "subtitle": "Detta är en inställning i termostaten.",
     "checkbox_title": "Regulerande temperatur",
     "temperatureRoom": "Rumstemperatur",
     "temperatureFloor": "Golvtemperatur",

@@ -2,6 +2,18 @@
   {
     "type": "group",
     "label": {
+      "en": "Use floor temperature or room temperature for regulating thermostat",
+      "sv": "Använd golvtemperatur eller rumstemperatur för att regulera termostat"
+    },
+    "children": [
+      {
+        "$extends": "regulator"
+      }
+    ]
+  },
+  {
+    "type": "group",
+    "label": {
       "en": "Update device interval",
       "sv": "Uppdateringsintervall för hämtning av data"
     },

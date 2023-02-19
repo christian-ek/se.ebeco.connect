@@ -1,0 +1,25 @@
+{
+  "id": "regulator",
+  "type": "dropdown",
+  "value": "temperatureFloor",
+  "label": {
+  "en": "Regulating temperature",
+  "sv": "Regulerande temperatur"
+  },
+  "values": [
+      {
+          "id": "temperatureFloor",
+          "label": {
+          "en": "Floor temperature",
+          "sv": "Golvtemperatur"
+          }
+      },
+      {
+          "id": "temperatureRoom",
+          "label": {
+          "en": "Room temperature",
+          "sv": "Rumstemperatur"
+          }
+      }
+  ]
+}
