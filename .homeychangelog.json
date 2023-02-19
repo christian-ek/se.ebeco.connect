@@ -28,5 +28,8 @@
   },
   "1.1.1": {
     "en": "Update app store information"
+  },
+  "2.0.0": {
+    "en": "Major rewrite for stability and readability. Added flows for both room and floor temperature. Moved settings from settings page to pair screen. (BREAKING) Your devices will need to be readded."
   }
 }
