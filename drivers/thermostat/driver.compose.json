@@ -6,34 +6,21 @@
   },
   "class": "thermostat",
   "capabilities": [
-    "target_temperature.temperatureFloor",
-    "measure_temperature.temperatureFloor",
-    "target_temperature.temperatureRoom",
-    "measure_temperature.temperatureRoom",
+    "target_temperature",
+    "measure_temperature",
+    "measure_temperature.alt",
     "measure_power"
   ],
   "capabilitiesOptions": {
-    "measure_temperature.temperatureFloor": {
-      "title": {
-        "en": "Floor temperature",
-        "sv": "Golvtemperatur"
-      },
-      "decimals": 0
-    },
-    "measure_temperature.temperatureRoom": {
-      "title": {
-        "en": "Room temperature",
-        "sv": "Rumstemperatur"
-      },
-      "decimals": 0
-    },
-    "target_temperature.temperatureRoom": {
+    "target_temperature": {
       "decimals": 0,
       "step": 1
     },
-    "target_temperature.temperatureFloor": {
-      "decimals": 0,
-      "step": 1
+    "measure_temperature": {
+      "decimals": 0
+    },
+    "measure_temperature.alt": {
+      "decimals": 0
     },
     "measure_power": {
       "approximated": true
