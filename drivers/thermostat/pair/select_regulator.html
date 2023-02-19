@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <div id="app">
+  <div id="app" style="position: relative">
     <header class="homey-header">
       <h1 class="homey-title" data-i18n="select_regulator.title"></h1>
       <p class="homey-subtitle" data-i18n="select_regulator.subtitle"></p>
@@ -29,7 +29,8 @@
         </div>
       </fieldset>
     </form>
-    <button @click="select" class="homey-button-primary-full" :disabled="error" data-i18n="select_regulator.save"></button>
+    <button @click="select" class="homey-button-primary-full" :disabled="error" data-i18n="select_regulator.save"
+     style="margin-top: 64%;"></button>
   </div>
 
   <script>
