@@ -34,5 +34,8 @@
   },
   "2.0.1": {
     "en": "Updated readme files"
+  },
+  "2.0.2": {
+    "en": "Minor pairing view css fix"
   }
 }
