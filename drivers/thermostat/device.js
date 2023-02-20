@@ -30,7 +30,6 @@ class ThermostatDevice extends Homey.Device {
 
     await this.api.getDevice(device.id)
       .then(data => {
-        this.log(data);
         this.setCapabilityValue('target_temperature', parseFloat(data.temperatureSet)).catch(this.error);
         if (this.getSetting('regulator') === 'temperatureFloor') {
           this.setCapabilityValue('measure_temperature', data.temperatureFloor).catch(this.error);

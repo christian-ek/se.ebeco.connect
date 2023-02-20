@@ -4,10 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <script src="../../../assets/vue.min.js"></script>
+  
 </head>
 
 <body>
-  <div id="app">
+  <div id="app" class="container">
     <header class="homey-header">
       <h1 class="homey-title" data-i18n="select_regulator.title"></h1>
       <p class="homey-subtitle" data-i18n="select_regulator.subtitle"></p>
@@ -29,10 +30,21 @@
         </div>
       </fieldset>
     </form>
-    <button @click="select" class="homey-button-primary-full" :disabled="error" data-i18n="select_regulator.save"
-     style="margin-top: 64%;"></button>
-  </div>
 
+    <div class="footer">
+      <button @click="select" :disabled="error" class="homey-button-primary-full visible" data-i18n="select_regulator.save"></button>
+    </div>
+  </div>
+  <style>
+    .container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .footer {
+      margin-top: auto;
+    }
+  </style>
   <script>
 
     Homey.setTitle('');
@@ -51,7 +63,7 @@
       },
       methods: {
         select() {
-          //Homey.showLoadingOverlay();
+          Homey.showLoadingOverlay();
 
           Homey.emit('select_regulator', this.selected)
             .then(device => {
@@ -61,7 +73,8 @@
                 .catch(function(err) {
                   this.error = true;
                   return Homey.alert(err.message);
-                });
+                })
+                .finally(Homey.hideLoadingOverlay());
               } else {
                 console.log('select_regulator failed');
                 this.error = true;
