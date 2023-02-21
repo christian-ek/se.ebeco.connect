@@ -49,5 +49,8 @@
   },
   "2.0.6": {
     "en": "Try to fix support for users that have added devices in older versions of the app"
+  },
+  "2.0.7": {
+    "en": "Fix support for devices added in older versions of the app"
   }
 }
