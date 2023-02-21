@@ -37,5 +37,8 @@
   },
   "2.0.2": {
     "en": "Minor pairing view css fix"
+  },
+  "2.0.3": {
+    "en": "Clean up unused code"
   }
 }
