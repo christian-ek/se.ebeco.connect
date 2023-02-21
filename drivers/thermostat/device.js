@@ -47,7 +47,8 @@ class ThermostatDevice extends Homey.Device {
         } else {
           this.setCapabilityValue('measure_power', 0.5).catch(this.error);
         }
-      });
+      })
+      .catch(err => this.error(err));
   }
 
   async setTempCapabilitiesOptions(regulator) {
@@ -88,9 +89,8 @@ class ThermostatDevice extends Homey.Device {
       setTimeout(() => {
         this.pauseDeviceUpdates = false;
       }, 120000);
-    } catch (error) {
-      this.log(error);
-      throw new Error(error);
+    } catch (err) {
+      this.error(err);
     }
   }
 
@@ -104,7 +104,7 @@ class ThermostatDevice extends Homey.Device {
 
     return this.api.updateDeviceState(data)
       .then(res => res)
-      .catch(err => this.log(err));
+      .catch(err => this.error(err));
   }
 
   onAdded() {
