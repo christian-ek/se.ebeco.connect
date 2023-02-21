@@ -60,7 +60,7 @@ class ThermostatDriver extends Homey.Driver {
     });
 
     session.setHandler('select_regulator', async data => {
-      this.homey.app.log(`[Driver] ${this.id} - select_regulator - `, data);
+      this.homey.app.log(`[Driver] ${this.id} - selected_regulator - `, data);
       this.device.settings.regulator = data;
       return this.device;
     });
