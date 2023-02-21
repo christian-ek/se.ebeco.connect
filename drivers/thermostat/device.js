@@ -10,7 +10,14 @@ class ThermostatDevice extends Homey.Device {
     this.device = this.getData();
     const settings = this.getSettings();
 
-    this.api = new EbecoApi(settings.username, settings.password, this.homey);
+    /* Add support for older versions of the app,
+    where username and password were in the app settings */
+    if (this.homey.settings.get('email') !== null && this.homey.settings.get('email') !== ''
+          && this.homey.settings.get('password') !== null && this.homey.settings.get('password') !== '') {
+      this.api = new EbecoApi(this.homey.settings.get('email'), this.homey.settings.get('password'), this.homey);
+    } else {
+      this.api = new EbecoApi(settings.username, settings.password, this.homey);
+    }
 
     const updateInterval = Number(settings.interval) * 1000;
 
