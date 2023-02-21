@@ -6,6 +6,7 @@ const EbecoApi = require('../../lib/api.js');
 class ThermostatDevice extends Homey.Device {
 
   async onInit() {
+    this.pauseDeviceUpdates = false;
     this.device = this.getData();
     const settings = this.getSettings();
 
@@ -30,7 +31,10 @@ class ThermostatDevice extends Homey.Device {
 
     await this.api.getDevice(device.id)
       .then(data => {
-        this.setCapabilityValue('target_temperature', parseFloat(data.temperatureSet)).catch(this.error);
+        if (!this.pauseDeviceUpdates) {
+          this.setCapabilityValue('target_temperature', parseFloat(data.temperatureSet)).catch(this.error);
+        }
+
         if (this.getSetting('regulator') === 'temperatureFloor') {
           this.setCapabilityValue('measure_temperature', data.temperatureFloor).catch(this.error);
           this.setCapabilityValue('measure_temperature.alt', data.temperatureRoom).catch(this.error);
@@ -78,6 +82,12 @@ class ThermostatDevice extends Homey.Device {
     try {
       await this.setCapabilityValue('target_temperature', value);
       await this.updateCapabilityValues('target_temperature');
+      /* Pause device from updating temperature for 2 minutes
+      so that the API will return the correct target temp */
+      this.pauseDeviceUpdates = true;
+      setTimeout(() => {
+        this.pauseDeviceUpdates = false;
+      }, 120000);
     } catch (error) {
       this.log(error);
       throw new Error(error);
