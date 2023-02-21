@@ -103,7 +103,6 @@ class ThermostatDevice extends Homey.Device {
     };
 
     return this.api.updateDeviceState(data)
-      .then(res => res)
       .catch(err => this.error(err));
   }
 
