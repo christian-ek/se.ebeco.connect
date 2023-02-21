@@ -40,5 +40,8 @@
   },
   "2.0.3": {
     "en": "Clean up unused code"
+  },
+  "2.0.4": {
+    "en": "Added better error handling."
   }
 }
