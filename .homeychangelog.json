@@ -58,5 +58,8 @@
   },
   "2.0.9": {
     "en": "Minor fixes"
+  },
+  "2.1.0": {
+    "en": "Code cleanup"
   }
 }
