@@ -38,8 +38,7 @@ class ThermostatDevice extends Homey.Device {
       updateInterval = 10000;
     }
 
-    const { device } = this;
-    this.log(`[${this.getName()}][${device.id}]`, `Update Interval: ${updateInterval}`);
+    this.log(`[${this.getName()}][${this.device.id}]`, `Update Interval: ${updateInterval}`);
 
     this.registerCapabilityListener('target_temperature', this.onCapabilitySetTemperature.bind(this));
 
