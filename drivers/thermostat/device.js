@@ -8,11 +8,13 @@ class ThermostatDevice extends Homey.Device {
   async onInit() {
     this.pauseDeviceUpdates = false;
     this.device = this.getData();
+    this.printInfo();
 
     /* Add support for older versions of the app,
      * where username and password were in the app settings */
     if (this.homey.settings.get('email') !== null && this.homey.settings.get('email') !== ''
           && this.homey.settings.get('password') !== null && this.homey.settings.get('password') !== '') {
+      this.log('TEst');
       this.setSettings({
         username: this.homey.settings.get('email'),
         password: this.homey.settings.get('password'),
@@ -24,11 +26,11 @@ class ThermostatDevice extends Homey.Device {
       this.homey.settings.set('interval', '');
     }
 
-    this.api = new EbecoApi(this.getSettings('username'), this.getSettings('password'), this.homey);
+    this.api = new EbecoApi(this.getSetting('username'), this.getSetting('password'), this.homey);
 
-    let updateInterval = Number(this.getSettings('interval')) * 1000;
+    let updateInterval = Number(this.getSetting('interval')) * 1000;
 
-    if (updateInterval < 10000) {
+    if (!updateInterval || updateInterval < 10000) {
       /* We never want to end up in a state where updateInterval is below 10000 */
       updateInterval = 10000;
     }
@@ -125,7 +127,7 @@ class ThermostatDevice extends Homey.Device {
       .catch(err => this.error(err));
   }
 
-  onAdded() {
+  printInfo() {
     this.log('device added');
     this.log('name:', this.getName());
     this.log('class:', this.getClass());
@@ -135,7 +137,10 @@ class ThermostatDevice extends Homey.Device {
       interval: this.getSetting('interval'),
       regulator: this.getSetting('regulator'),
     });
+  }
 
+  onAdded() {
+    this.printInfo();
     this.setTempCapabilitiesOptions(this.getSetting('regulator'));
   }
 
@@ -145,7 +150,7 @@ class ThermostatDevice extends Homey.Device {
 
   setUpdateInterval(newInterval) {
     let updateInterval = Number(newInterval) * 1000;
-    if (updateInterval < 10000) {
+    if (!updateInterval || updateInterval < 10000) {
       /* We never want to end up in a state where updateInterval is below 10000 */
       updateInterval = 10000;
     }
