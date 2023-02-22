@@ -8,13 +8,16 @@ class ThermostatDevice extends Homey.Device {
   async onInit() {
     this.pauseDeviceUpdates = false;
     this.device = this.getData();
+    this.log('device loaded');
     this.printInfo();
 
     /* Add support for older versions of the app,
-     * where username and password were in the app settings */
+     * where username and password were in the app settings.
+     *
+     * Move the configuration to the device and remove it from app settings.
+     */
     if (this.homey.settings.get('email') !== null && this.homey.settings.get('email') !== ''
           && this.homey.settings.get('password') !== null && this.homey.settings.get('password') !== '') {
-      this.log('TEst');
       this.setSettings({
         username: this.homey.settings.get('email'),
         password: this.homey.settings.get('password'),
@@ -128,7 +131,6 @@ class ThermostatDevice extends Homey.Device {
   }
 
   printInfo() {
-    this.log('device added');
     this.log('name:', this.getName());
     this.log('class:', this.getClass());
     this.log('data', this.getData());
@@ -140,6 +142,7 @@ class ThermostatDevice extends Homey.Device {
   }
 
   onAdded() {
+    this.log('device added');
     this.printInfo();
     this.setTempCapabilitiesOptions(this.getSetting('regulator'));
   }
