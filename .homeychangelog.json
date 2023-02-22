@@ -55,5 +55,8 @@
   },
   "2.0.8": {
     "en": "Enforce an update interval minimum of 10 seconds"
+  },
+  "2.0.9": {
+    "en": "Minor fixes"
   }
 }
