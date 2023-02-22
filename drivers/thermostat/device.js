@@ -8,7 +8,6 @@ class ThermostatDevice extends Homey.Device {
   async onInit() {
     this.pauseDeviceUpdates = false;
     this.device = this.getData();
-    const settings = this.getSettings();
 
     /* Add support for older versions of the app,
      * where username and password were in the app settings */
@@ -25,9 +24,14 @@ class ThermostatDevice extends Homey.Device {
       this.homey.settings.set('interval', '');
     }
 
-    this.api = new EbecoApi(settings.username, settings.password, this.homey);
+    this.api = new EbecoApi(this.getSettings('username'), this.getSettings('password'), this.homey);
 
-    const updateInterval = Number(settings.interval) * 1000;
+    let updateInterval = Number(this.getSettings('interval')) * 1000;
+
+    if (updateInterval < 10000) {
+      /* We never want to end up in a state where updateInterval is below 10000 */
+      updateInterval = 10000;
+    }
 
     const { device } = this;
     this.log(`[${this.getName()}][${device.id}]`, `Update Interval: ${updateInterval}`);
@@ -140,7 +144,11 @@ class ThermostatDevice extends Homey.Device {
   }
 
   setUpdateInterval(newInterval) {
-    const updateInterval = Number(newInterval) * 1000;
+    let updateInterval = Number(newInterval) * 1000;
+    if (updateInterval < 10000) {
+      /* We never want to end up in a state where updateInterval is below 10000 */
+      updateInterval = 10000;
+    }
     this.log(`Creating update interval with ${updateInterval}`);
     this.interval = setInterval(async () => {
       await this.getDeviceData();
