@@ -64,5 +64,8 @@
   },
   "2.1.1": {
     "en": "Fix unhandledRejection"
+  },
+  "2.1.2": {
+    "en": "Minor boring fix"
   }
 }
