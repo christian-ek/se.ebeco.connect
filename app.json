@@ -26,7 +26,7 @@
   },
   "author": {
     "name": "Christian Ek",
-    "email": "christian.ek@live.se"
+    "email": "hi@christianek.io"
   },
   "contributing": {
     "donate": {
@@ -35,7 +35,7 @@
       }
     }
   },
-  "support": "mailto:christian.ek@live.se",
+  "support": "mailto:hi@christianek.io",
   "brandColor": "#30318b",
   "tags": {
     "en": [
@@ -167,8 +167,8 @@
         {
           "type": "group",
           "label": {
-            "en": "Update device interval",
-            "sv": "Uppdateringsintervall för hämtning av data"
+            "en": "Settings for getting data",
+            "sv": "Inställningar för hämtning av data"
           },
           "children": [
             {
