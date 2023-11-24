@@ -1,0 +1,58 @@
+{
+  "title": {
+    "en": "Thermostat program !{{is|isn't}}",
+    "sv": "Termostat program !{{är|är inte}}"
+  },
+  "titleFormatted": {
+    "en": "Thermostat program !{{is|isn't}} [[mode]]",
+    "sv": "Termostat program !{{är|är inte}} [[mode]]"
+  },
+  "args": [
+    {
+      "name": "device",
+      "type": "device",
+      "filter": "driver_id=thermostat"
+    },
+    {
+      "name": "mode",
+      "type": "dropdown",
+      "values": [
+        {
+          "id": "Manual",
+          "title": {
+            "en": "Manual",
+            "sv": "Manuellt"
+          }
+        },
+        {
+          "id": "Week",
+          "title": {
+            "en": "Week",
+            "sv": "Vecka"
+          }
+        },
+        {
+          "id": "Remote",
+          "title": {
+            "en": "Remote",
+            "sv": "Fjärrstyrning"
+          }
+        },
+        {
+          "id": "Timer",
+          "title": {
+            "en": "Timer",
+            "sv": "Timer"
+          }
+        },
+        {
+          "id": "Hotel",
+          "title": {
+            "en": "Hotel",
+            "sv": "Hotell"
+          }
+        }
+      ]
+    }
+  ]
+}
