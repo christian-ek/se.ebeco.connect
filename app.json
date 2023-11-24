@@ -54,6 +54,69 @@
     ]
   },
   "source": "https://github.com/christian-ek/se.ebeco.connect",
+  "flow": {
+    "conditions": [
+      {
+        "title": {
+          "en": "Thermostat program !{{is|isn't}}",
+          "sv": "Termostat program !{{är|är inte}}"
+        },
+        "titleFormatted": {
+          "en": "Thermostat program !{{is|isn't}} [[mode]]",
+          "sv": "Termostat program !{{är|är inte}} [[mode]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=thermostat"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "Manual",
+                "title": {
+                  "en": "Manual",
+                  "sv": "Manuellt"
+                }
+              },
+              {
+                "id": "Week",
+                "title": {
+                  "en": "Week",
+                  "sv": "Vecka"
+                }
+              },
+              {
+                "id": "Remote",
+                "title": {
+                  "en": "Remote",
+                  "sv": "Fjärrstyrning"
+                }
+              },
+              {
+                "id": "Timer",
+                "title": {
+                  "en": "Timer",
+                  "sv": "Timer"
+                }
+              },
+              {
+                "id": "Hotel",
+                "title": {
+                  "en": "Hotel",
+                  "sv": "Hotell"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "thermostat_program_equals"
+      }
+    ]
+  },
   "drivers": [
     {
       "id": "thermostat",
@@ -66,7 +129,9 @@
         "target_temperature",
         "measure_temperature",
         "measure_temperature.alt",
-        "measure_power"
+        "measure_power",
+        "onoff",
+        "thermostat_program"
       ],
       "capabilitiesOptions": {
         "target_temperature": {
@@ -220,5 +285,58 @@
         }
       ]
     }
-  ]
+  ],
+  "capabilities": {
+    "thermostat_program": {
+      "type": "enum",
+      "title": {
+        "en": "Thermostat program",
+        "sv": "Termostatprogram"
+      },
+      "desc": {
+        "en": "Selected program running on thermostat",
+        "sv": "Vald program som körs på termostat"
+      },
+      "values": [
+        {
+          "id": "Manual",
+          "title": {
+            "en": "Manual",
+            "sv": "Manuellt"
+          }
+        },
+        {
+          "id": "Week",
+          "title": {
+            "en": "Week",
+            "sv": "Vecka"
+          }
+        },
+        {
+          "id": "Remote",
+          "title": {
+            "en": "Remote",
+            "sv": "Fjärrstyrning"
+          }
+        },
+        {
+          "id": "Timer",
+          "title": {
+            "en": "Timer",
+            "sv": "Timer"
+          }
+        },
+        {
+          "id": "Hotel",
+          "title": {
+            "en": "Hotel",
+            "sv": "Hotell"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker"
+    }
+  }
 }

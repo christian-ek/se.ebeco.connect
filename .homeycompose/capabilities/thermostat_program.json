@@ -1,0 +1,51 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Thermostat program",
+    "sv": "Termostatprogram"
+  },
+  "desc": {
+    "en": "Selected program running on thermostat",
+    "sv": "Vald program som körs på termostat"
+  },
+  "values": [
+    {
+      "id": "Manual",
+      "title": {
+        "en": "Manual",
+        "sv": "Manuellt"
+      }
+    },
+    {
+      "id": "Week",
+      "title": {
+        "en": "Week",
+        "sv": "Vecka"
+      }
+    },
+    {
+      "id": "Remote",
+      "title": {
+        "en": "Remote",
+        "sv": "Fjärrstyrning"
+      }
+    },
+    {
+      "id": "Timer",
+      "title": {
+        "en": "Timer",
+        "sv": "Timer"
+      }
+    },
+    {
+      "id": "Hotel",
+      "title": {
+        "en": "Hotel",
+        "sv": "Hotell"
+      }
+    }
+  ],
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker"
+}
