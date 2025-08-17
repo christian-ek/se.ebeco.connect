@@ -10,6 +10,7 @@
     "measure_temperature",
     "measure_temperature.alt",
     "measure_power",
+    "meter_power",
     "onoff",
     "thermostat_program"
   ],
@@ -42,21 +43,21 @@
           "en": "Login to Ebeco Connect",
           "sv": "Logga in på Ebeco Connect"
         },
-        "usernameLabel": { 
+        "usernameLabel": {
           "en": "E-mail address",
           "sv": "E-postadress"
         },
-        "usernamePlaceholder": { 
+        "usernamePlaceholder": {
           "en": "john@doe.com",
           "sv": "john@doe.com"
         },
-        "passwordLabel": { 
+        "passwordLabel": {
           "en": "Password",
           "sv": "Lösenord"
         },
-        "passwordPlaceholder": { 
+        "passwordPlaceholder": {
           "en": "Password",
-          "sv": "Lösenord" 
+          "sv": "Lösenord"
         }
       }
     },
