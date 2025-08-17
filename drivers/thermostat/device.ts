@@ -114,10 +114,8 @@ class ThermostatDevice extends Homey.Device {
         await this.setCapabilityValue("measure_power", 0.5);
       }
 
-      // Calculate cumulative energy consumption in kWh
-      const energyConsumptionKwh =
-        (data.todaysOnMinutes * data.installedEffect) / (1000 * 60);
-      await this.setCapabilityValue("meter_power", energyConsumptionKwh);
+      // Calculate and update cumulative energy consumption
+      await this.updateCumulativeEnergy(data.todaysOnMinutes, data.installedEffect);
 
       await this.setCapabilityValue("onoff", data.powerOn);
       await this.setCapabilityValue(
@@ -126,6 +124,45 @@ class ThermostatDevice extends Homey.Device {
       );
     } catch (err) {
       this.error(err);
+    }
+  }
+
+  private async updateCumulativeEnergy(todaysOnMinutes: number, installedEffect: number): Promise<void> {
+    try {
+      // Get stored values
+      let cumulativeEnergy = this.getStoreValue('cumulative_energy_kwh') || 0;
+      let lastTodaysMinutes = this.getStoreValue('last_todays_minutes') || 0;
+      let lastDate = this.getStoreValue('last_date') || new Date().toDateString();
+      
+      const currentDate = new Date().toDateString();
+      const todaysEnergyKwh = (todaysOnMinutes * installedEffect) / (1000 * 60);
+      
+      // Check if it's a new day (todaysOnMinutes reset)
+      if (currentDate !== lastDate || todaysOnMinutes < lastTodaysMinutes) {
+        // New day detected - add yesterday's final consumption to cumulative total
+        const yesterdaysFinalEnergyKwh = (lastTodaysMinutes * installedEffect) / (1000 * 60);
+        cumulativeEnergy += yesterdaysFinalEnergyKwh;
+        
+        this.log(`New day detected. Added ${yesterdaysFinalEnergyKwh.toFixed(3)} kWh to cumulative total. New cumulative: ${cumulativeEnergy.toFixed(3)} kWh`);
+        
+        // Update stored values for new day
+        await this.setStoreValue('cumulative_energy_kwh', cumulativeEnergy);
+        await this.setStoreValue('last_date', currentDate);
+      }
+      
+      // Calculate total cumulative energy (historical + today's)
+      const totalCumulativeEnergyKwh = cumulativeEnergy + todaysEnergyKwh;
+      
+      // Update meter_power with cumulative value (never decreases)
+      await this.setCapabilityValue("meter_power", totalCumulativeEnergyKwh);
+      
+      // Store current values for next update
+      await this.setStoreValue('last_todays_minutes', todaysOnMinutes);
+      
+      this.log(`Energy: Today: ${todaysEnergyKwh.toFixed(3)} kWh, Cumulative: ${totalCumulativeEnergyKwh.toFixed(3)} kWh`);
+      
+    } catch (err) {
+      this.error('Error updating cumulative energy:', err);
     }
   }
 
