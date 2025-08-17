@@ -76,5 +76,8 @@
   },
   "3.0.0": {
     "en": "Move to typescript, added meter_power capability"
+  },
+  "3.0.1": {
+    "en": "meter_power capability"
   }
 }
