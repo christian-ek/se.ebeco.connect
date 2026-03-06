@@ -4,7 +4,8 @@
 // https://github.com/dhutchison/homebridge-ebeco/blob/master/src/lib/ebecoApi.ts
 
 import Homey from "homey";
-import axios from "axios";
+import axios, { type AxiosInstance } from "axios";
+import https from "https";
 import type {
   MvcAjaxResponse,
   LoginRequest,
@@ -22,6 +23,8 @@ export class EbecoApi extends Homey.SimpleClass {
   private password: string;
   private accessToken: string;
   private homey: any;
+  private client: AxiosInstance;
+  private loginPromise: Promise<LoginResponse> | null = null;
 
   private mockDevices: Device[] = [
     {
@@ -108,22 +111,24 @@ export class EbecoApi extends Homey.SimpleClass {
       throw new Error('Missing "username" or "password".');
     }
 
-    /* Configure some defaults for axios */
-    axios.defaults.baseURL = "https://ebecoconnect.com";
-    axios.defaults.headers.common = {
-      "Abp.TenantId": "1",
-      "Content-Type": "application/json",
-    };
+    /* Create a dedicated axios instance with keepAlive disabled to prevent stale socket reuse */
+    this.client = axios.create({
+      baseURL: "https://ebecoconnect.com",
+      headers: {
+        "Abp.TenantId": "1",
+        "Content-Type": "application/json",
+      },
+      httpsAgent: new https.Agent({ keepAlive: false }),
+    });
 
     /* Configure an interceptor to refresh our authentication credentials */
-    axios.interceptors.response.use(
+    this.client.interceptors.response.use(
       (response) => {
-        /* Return a successful response back to the calling service */
         return response;
       },
       async (error) => {
         /* Return any error which is not due to authentication back to the calling service */
-        if (error.response.status !== 401) {
+        if (!error.response || error.response.status !== 401) {
           return Promise.reject(error);
         }
 
@@ -133,24 +138,11 @@ export class EbecoApi extends Homey.SimpleClass {
         }
 
         /* Login again then retry the request */
-        // Try request again with new token
         try {
           const loginResponse = await this.login();
-          // New request with new token
           const { config } = error;
-          config.headers[
-            "Authorization"
-          ] = `Bearer ${loginResponse.accessToken}`;
-          return new Promise((resolve, reject) => {
-            axios
-              .request(config)
-              .then((response) => {
-                resolve(response);
-              })
-              .catch((retryError) => {
-                reject(retryError);
-              });
-          });
+          config.headers["Authorization"] = `Bearer ${loginResponse.accessToken}`;
+          return this.client.request(config);
         } catch (authenticationError) {
           return Promise.reject(authenticationError);
         }
@@ -175,32 +167,40 @@ export class EbecoApi extends Homey.SimpleClass {
       });
     }
 
+    /* If a login is already in progress, return the same promise (login mutex) */
+    if (this.loginPromise) {
+      this.homey.log("Login already in progress, waiting for existing login...");
+      return this.loginPromise;
+    }
+
     this.homey.log(
       `Sending login request with user name: ${data.userNameOrEmailAddress}`
     );
 
-    return new Promise((resolve, reject) => {
-      axios
-        .post<MvcAjaxResponse<LoginResponse>>(
-          "/api/TokenAuth/Authenticate",
-          data
-        )
-        .then((response) => {
-          if (response.data.result.requiresTwoFactorVerification) {
-            reject(new Error("Account requires two factor authentication"));
-          } else {
-            this.accessToken = response.data.result.accessToken;
-            this.homey.settings.set("token", response.data.result.accessToken);
-            resolve(response.data.result);
-          }
-        })
-        .catch((err) => {
-          if (err.response && err.response.status === 500) {
-            reject(new Error("Wrong username or password"));
-          }
-          reject(err);
-        });
-    });
+    this.loginPromise = this.client
+      .post<MvcAjaxResponse<LoginResponse>>(
+        "/api/TokenAuth/Authenticate",
+        data
+      )
+      .then((response) => {
+        if (response.data.result.requiresTwoFactorVerification) {
+          throw new Error("Account requires two factor authentication");
+        }
+        this.accessToken = response.data.result.accessToken;
+        this.homey.settings.set("token", response.data.result.accessToken);
+        return response.data.result;
+      })
+      .catch((err) => {
+        if (err.response && err.response.status === 500) {
+          throw new Error("Wrong username or password");
+        }
+        throw err;
+      })
+      .finally(() => {
+        this.loginPromise = null;
+      });
+
+    return this.loginPromise;
   }
 
   /**
@@ -218,7 +218,7 @@ export class EbecoApi extends Homey.SimpleClass {
     };
 
     return new Promise((resolve, reject) => {
-      axios
+      this.client
         .get<MvcAjaxResponse<Device[]>>(
           "/api/services/app/Devices/GetUserDevices",
           config
@@ -261,7 +261,7 @@ export class EbecoApi extends Homey.SimpleClass {
     };
 
     return new Promise((resolve, reject) => {
-      axios
+      this.client
         .get<MvcAjaxResponse<Device>>(
           `/api/services/app/Devices/GetUserDeviceById?id=${deviceId}`,
           config
@@ -301,7 +301,7 @@ export class EbecoApi extends Homey.SimpleClass {
     const toStr = to.toISOString().split("T")[0];
 
     return new Promise((resolve, reject) => {
-      axios
+      this.client
         .get<MvcAjaxResponse<EnergyData[]>>(
           `/api/services/app/Devices/GetUserDeviceEnergyData?Id=${deviceId}&From=${fromStr}&To=${toStr}`,
           config
@@ -339,7 +339,7 @@ export class EbecoApi extends Homey.SimpleClass {
     };
 
     return new Promise((resolve, reject) => {
-      axios
+      this.client
         .put<MvcAjaxResponse<any>>(
           "/api/services/app/Devices/UpdateUserDevice",
           updatedState,
