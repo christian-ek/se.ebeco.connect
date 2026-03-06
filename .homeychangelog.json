@@ -79,5 +79,8 @@
   },
   "3.0.1": {
     "en": "meter_power capability"
+  },
+  "3.0.2": {
+    "en": "fix: prevent stale socket reuse and login request storms"
   }
 }
